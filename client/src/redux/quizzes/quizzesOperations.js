@@ -1,13 +1,13 @@
 import axios from 'axios';
 import quizzesActions from './quizzesActions';
 
-axios.defaults.baseURL = 'http://localhost:2000';
+axios.defaults.baseURL = 'https://shrouded-depths-14326.herokuapp.com/api';
 
 const fetchQuizzes = () => dispatch => {
   dispatch(quizzesActions.fetchQuizzesRequest());
 
   axios
-    .get('/quizzes')
+    .get('/users')
     .then(({ data }) => dispatch(quizzesActions.fetchQuizzesSuccess(data)))
     .catch(error => dispatch(quizzesActions.fetchQuizzesError(error)));
 };
