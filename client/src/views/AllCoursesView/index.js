@@ -1,17 +1,12 @@
 import React, { Component } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { quizzesOperations, quizzesSelectors } from "../../redux/quizzes";
 
 class AllCoursesView extends Component {
   componentDidMount() {
-    console.log("start");
-    axios.get("/api/users").then((res) => {
-      console.log(res, "res");
-    });
-    console.log("end");
-    // this.props.onFetchQuizzes();
+    this.props.onFetchQuizzes();
   }
 
   render() {
