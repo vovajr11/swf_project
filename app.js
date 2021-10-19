@@ -17,6 +17,7 @@ const app = express();
 app.use(cors());
 // Logger Middleware
 app.use(morgan("dev"));
+
 // Bodyparser Middleware
 app.use(bodyParser.json());
 
@@ -31,6 +32,7 @@ mongoose
 
 // Use Routes
 app.use("/api/users", userRoutes);
+// app.use("/api/notes", );
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {

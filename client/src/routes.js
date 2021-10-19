@@ -55,6 +55,6 @@ export default [
     label: 'Register',
     exact: true,
     key: 7,
-    component: lazy(() => import('./views/RegisterView')),
+    component: lazy(() => import('./views/RegisterView/index')),
   },
 ];

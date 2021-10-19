@@ -23,6 +23,10 @@ class UserController {
     return this._getUsers.bind(this);
   }
 
+  get getCurrentUser() {
+    return this._getCurrentUser.bind(this);
+  }
+
   get signIn() {
     return this._signIn.bind(this);
   }
@@ -43,10 +47,14 @@ class UserController {
         password: passwordHash,
       });
 
+      const token = await this.checkUser(email, password);
+
       return res.status(201).json({
-        id: user._id,
-        username: user.username,
-        email: user.email,
+        user: {
+          username: user.username,
+          email: user.email,
+        },
+        token,
       });
     } catch (err) {
       next(err);
@@ -63,13 +71,26 @@ class UserController {
     }
   }
 
+  async _getCurrentUser(req, res, next) {
+    const [userForResponse] = this.prepareUsersResponse([req.user]);
+
+    return res.status(200).json(userForResponse);
+  }
+
   async _signIn(req, res, next) {
     try {
       const { email, password } = req.body;
 
+      const user = await userModel.findUserByEmail(email);
       const token = await this.checkUser(email, password);
 
-      return res.status(200).json({ token });
+      return res.status(200).json({
+        user: {
+          username: user.username,
+          email: user.email,
+        },
+        token,
+      });
     } catch (err) {
       next(err);
     }
@@ -170,9 +191,12 @@ class UserController {
 
   prepareUsersResponse(users) {
     return users.map(user => {
-      const { username, email, _id } = user;
-
-      return { id: _id, username, email };
+      const { username, email, _id, token } = user;
+      return {
+        id: _id,
+        username,
+        email,
+      };
     });
   }
 }

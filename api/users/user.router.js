@@ -4,12 +4,18 @@ const userController = require('./user.controller');
 const userRouter = Router();
 
 userRouter.post(
-  '/',
+  '/sign-up',
   userController.validateCreateUser,
   userController.createUser,
 );
 
 userRouter.get('/', userController.getUsers);
+
+userRouter.get(
+  '/current',
+  userController.authorize,
+  userController.getCurrentUser,
+);
 
 userRouter.put(
   '/sign-in',

@@ -1,9 +1,14 @@
 import React, { Component, Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { authOperations } from '../redux/auth';
 import Layout from './Layout';
 import routes from '../routes';
 
-export default class App extends Component {
+class App extends Component {
+  componentDidMount() {
+    this.props.onGetCurrentUser();
+  }
   render() {
     return (
       <BrowserRouter>
@@ -20,3 +25,7 @@ export default class App extends Component {
     );
   }
 }
+
+export default connect(null, {
+  onGetCurrentUser: authOperations.getCurrentUser,
+})(App);

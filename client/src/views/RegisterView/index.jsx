@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { authOperations } from '../../redux/auth';
+import { authOperations } from '../../redux/auth/index';
 
 const styles = {
   form: {
@@ -13,8 +13,9 @@ const styles = {
   },
 };
 
-class LoginView extends Component {
+class ReqisterView extends Component {
   state = {
+    username: '',
     email: '',
     password: '',
   };
@@ -26,18 +27,27 @@ class LoginView extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onLogin({ ...this.state });
+    this.props.onRegister({ ...this.state });
     this.setState({ name: '', email: '', password: '' });
   };
-
   render() {
-    const { email, password } = this.state;
+    const { username, email, password } = this.state;
 
     return (
       <div>
-        <h1>Login page</h1>
+        <h1>Register page</h1>
 
         <form onSubmit={this.handleSubmit} style={styles.form}>
+          <label style={styles.label}>
+            Name
+            <input
+              type="text"
+              name="username"
+              value={username}
+              onChange={this.handleChange}
+            />
+          </label>
+
           <label style={styles.label}>
             Email
             <input
@@ -58,11 +68,13 @@ class LoginView extends Component {
             />
           </label>
 
-          <button type="submit">Login</button>
+          <button type="submit">Register</button>
         </form>
       </div>
     );
   }
 }
 
-export default connect(null, { onLogin: authOperations.logIn })(LoginView);
+export default connect(null, { onRegister: authOperations.register })(
+  ReqisterView,
+);
