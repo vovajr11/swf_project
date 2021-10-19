@@ -1,7 +1,9 @@
 import axios from 'axios';
 import authActions from './authActions';
 
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = 'https://shrouded-depths-14326.herokuapp.com/api';
+
+// console.log(process.env.REACT_APP_API_URL, 'process.env');
 
 const token = {
   set(token) {

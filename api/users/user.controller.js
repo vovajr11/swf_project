@@ -9,6 +9,7 @@ const {
   UnauthorizedError,
   NotFoundError,
 } = require('../helpers/errors.constructor');
+const config = require('../../config');
 
 class UserController {
   constructor() {
@@ -107,7 +108,7 @@ class UserController {
       throw new UnauthorizedError('Authentication failed');
     }
 
-    const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    const token = await jwt.sign({ id: user._id }, config.JWT_SECRET, {
       expiresIn: 2 * 24 * 60 * 60, // two days
     });
 
