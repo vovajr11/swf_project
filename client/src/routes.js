@@ -31,7 +31,7 @@ export default [
     label: 'Propfile',
     exact: true,
     key: 4,
-    component: lazy(() => import('./views/ProfileView')),
+    component: lazy(() => import('./views/ProfileView/index')),
   },
 
   {

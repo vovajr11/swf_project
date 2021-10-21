@@ -1,11 +1,12 @@
 const { Router } = require('express');
 const userController = require('./user.controller');
+const validationFns = require('../helpers/validationFns');
 
 const userRouter = Router();
 
 userRouter.post(
   '/sign-up',
-  userController.validateCreateUser,
+  validationFns.validateCreateUser,
   userController.createUser,
 );
 
@@ -13,21 +14,12 @@ userRouter.get('/', userController.getUsers);
 
 userRouter.get(
   '/current',
-  userController.authorize,
+  validationFns.authorize,
   userController.getCurrentUser,
 );
 
-userRouter.put(
-  '/sign-in',
-  userController.validateSignIn,
-  userController.signIn,
-);
+userRouter.put('/sign-in', validationFns.validateSignIn, userController.signIn);
 
-userRouter.patch('/logout', userController.authorize, userController.logout);
-// userRouter.get(
-//   '/:id',
-//   CourseController.validateId,
-//   CourseController.getCourseById,
-// );
+userRouter.patch('/logout', validationFns.authorize, userController.logout);
 
 module.exports = userRouter;

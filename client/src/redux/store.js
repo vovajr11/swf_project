@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import quizzesReducer from './quizzes/quizzesReducer';
 import authReducer from './auth/authReducer';
 import burgerReducer from './burgerMenu/burgerReducer';
+import noteReducer from './notes/noteReducer';
 
 const authPersistConfig = {
   key: 'auth',
@@ -16,6 +17,7 @@ export const store = configureStore({
     auth: persistReducer(authPersistConfig, authReducer),
     quizzes: quizzesReducer,
     burger: burgerReducer,
+    notes: noteReducer,
   },
 });
 
