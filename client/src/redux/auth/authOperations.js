@@ -19,6 +19,7 @@ const register = credentials => dispatch => {
     .post('/users/sign-up', credentials)
     .then(response => {
       token.set(response.data.token);
+      console.log(response.data);
       dispatch(authActions.registerSuccess(response.data));
     })
     .catch(error => dispatch(authActions.registerError(error)));

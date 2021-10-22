@@ -44,11 +44,19 @@ class Validation {
 
   prepareUsersResponse(users) {
     return users.map(user => {
-      const { username, email, _id, notes } = user;
+      const { username, email, _id } = user;
       return {
         id: _id,
         username,
         email,
+      };
+    });
+  }
+
+  getUserNotes(users) {
+    return users.map(user => {
+      const { notes } = user;
+      return {
         notes,
       };
     });

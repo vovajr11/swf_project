@@ -12,9 +12,19 @@ const addNote = noteData => (dispatch, getState) => {
   axios
     .put(`/notes/${id}`, { noteData })
     .then(({ data }) => {
+      console.log(noteData, 'noteData');
       dispatch(notesActions.addNoteSuccess(noteData));
     })
     .catch(error => dispatch(notesActions.addNoteError(error)));
+};
+
+const removeNote = id => dispatch => {
+  dispatch(notesActions.removeNoteRequest());
+
+  axios
+    .delete(`/notes/${id}`)
+    .then(() => dispatch(notesActions.removeNoteSuccess(id)))
+    .catch(error => dispatch(notesActions.removeNoteError(error)));
 };
 
 const fetchNoteForUser = () => (dispatch, getState) => {
@@ -30,6 +40,6 @@ const fetchNoteForUser = () => (dispatch, getState) => {
 
 export default {
   addNote,
+  removeNote,
   fetchNoteForUser,
 };
-

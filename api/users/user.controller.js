@@ -46,6 +46,7 @@ class UserController {
         user: {
           username: user.username,
           email: user.email,
+          id: user._id,
         },
         token,
       });
@@ -81,6 +82,7 @@ class UserController {
         user: {
           username: user.username,
           email: user.email,
+          id: user._id,
         },
         token,
       });

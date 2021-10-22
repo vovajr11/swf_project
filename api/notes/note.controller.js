@@ -7,49 +7,23 @@ const validationFns = require('../helpers/validationFns');
 
 class NoteController {
   async getCurrentUserNotes(req, res, next) {
-    const [userForResponse] = validationFns.prepareUsersResponse([req.user]);
+    const [data] = validationFns.getUserNotes([req.user]);
 
-    return res.status(200).json(userForResponse.notes);
+    return res.status(200).json(data.notes);
   }
 
   async addNoteForUser(req, res, next) {
     try {
-      const { word, translatedWord } = req.body.noteData;
+      const { word, translatedWord, id } = req.body.noteData;
 
       const updatedUser = await userModel.findByIdAndUpdate(
         req.user._id,
         {
           $push: {
             notes: {
+              id,
               word,
               translatedWord,
-              id: uuidv4(),
-            },
-          },
-        },
-        {
-          new: true,
-        },
-      );
-
-      return res.status(200).json(updatedUser);
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  async addNoteForUser(req, res, next) {
-    try {
-      const { word, translatedWord } = req.body.noteData;
-
-      const updatedUser = await userModel.findByIdAndUpdate(
-        req.user._id,
-        {
-          $push: {
-            notes: {
-              word,
-              translatedWord,
-              id: uuidv4(),
             },
           },
         },
@@ -66,9 +40,6 @@ class NoteController {
 
   async removeNoteForUser(req, res, next) {
     try {
-      console.log('------------------------------');
-      console.log(req.params.id, 'req.params.id;');
-      console.log(req.user._id, 'req.user._id,');
       const noteId = req.params.id;
 
       const updatedUser = await userModel.findByIdAndUpdate(

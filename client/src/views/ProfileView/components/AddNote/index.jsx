@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { v4 as uuid_v4 } from 'uuid';
 import { noteOperations } from '../../../../redux/notes';
 
 class AddNote extends Component {
@@ -15,7 +16,7 @@ class AddNote extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    this.props.onAddTask({ ...this.state });
+    this.props.onAddTask({ ...this.state, id: uuid_v4() });
 
     this.setState({ word: '', translatedWord: '' });
   };
