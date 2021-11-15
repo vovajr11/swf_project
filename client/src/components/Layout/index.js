@@ -7,7 +7,7 @@ import UserMenu from '../RightBar/UserMenu';
 
 const Layout = ({ children, isAuthenticated }) => (
   <Wrapp>
-    <AppBar />
+    {isAuthenticated && <AppBar />}
     {children}
     {isAuthenticated && <UserMenu />}
   </Wrapp>

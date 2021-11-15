@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import routes from '../../../../routes';
 import * as S from './MenuStyle';
 import { burgerAction } from '../../../../redux/burgerMenu';
+
+const routes = [
+  {
+    path: '/',
+    label: 'Home',
+    exact: true,
+  },
+
+  {
+    path: '/courses',
+    label: 'Courses',
+    exact: true,
+  },
+
+  {
+    path: '/profile',
+    label: 'Propfile',
+    exact: true,
+  },
+
+  {
+    path: '/setting',
+    label: 'Setting',
+    exact: true,
+  },
+];
 
 class Menu extends Component {
   render() {
@@ -14,7 +39,6 @@ class Menu extends Component {
           <li key={route.path}>
             <S.LinkElem
               exact={route.exact}
-              key={route.label}
               to={route.path}
               onClick={() => (getBurgerState ? openBurger() : '')}
             >
@@ -28,7 +52,7 @@ class Menu extends Component {
 }
 
 const mapStateToProps = state => ({
-  getBurgerState: burgerAction.getBurderState(state), // get burger state ;)
+  getBurgerState: burgerAction.getBurderState(state),
 });
 
 const mapDispatchToProps = {

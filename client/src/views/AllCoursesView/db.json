@@ -1,0 +1,151 @@
+[
+  {
+    "url": "lvl-A0",
+    "courseName": "Рівень А0",
+    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "quizzes": [
+      {
+        "id": 0,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
+      },
+      {
+        "id": 1,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
+      },
+      {
+        "id": 2,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
+      },
+      {
+        "id": 3,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
+      }
+    ]
+  },
+
+  {
+    "url": "lvl-A1",
+    "courseName": "Рівень А1",
+    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "quizzes": [
+      {
+        "quizName": "Тести",
+        "descr": "Потрібно вибрати одну правильну відповідь з декілько варіантів"
+      },
+      {
+        "quizName": "Скласти речення",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      },
+      {
+        "quizName": "Перекласти речення",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      },
+      {
+        "quizName": "Вставити слово",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      }
+    ]
+  },
+
+  {
+    "url": "lvl-A2",
+    "courseName": "Рівень А2",
+    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "quizzes": [
+      {
+        "quizName": "Тести",
+        "descr": "Потрібно вибрати одну правильну відповідь з декілько варіантів"
+      },
+      {
+        "quizName": "Скласти речення",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      },
+      {
+        "quizName": "Перекласти речення",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      },
+      {
+        "quizName": "Вставити слово",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      }
+    ]
+  },
+
+  {
+    "url": "lvl-B1",
+    "courseName": "Рівень B1",
+    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "quizzes": [
+      {
+        "quizName": "Тести",
+        "descr": "Потрібно вибрати одну правильну відповідь з декілько варіантів"
+      },
+      {
+        "quizName": "Скласти речення",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      },
+      {
+        "quizName": "Перекласти речення",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      },
+      {
+        "quizName": "Вставити слово",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      }
+    ]
+  },
+  {
+    "url": "lvl-B1",
+    "courseName": "Рівень B1",
+    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "quizzes": [
+      {
+        "quizName": "Тести",
+        "descr": "Потрібно вибрати одну правильну відповідь з декілько варіантів"
+      },
+      {
+        "quizName": "Скласти речення",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      },
+      {
+        "quizName": "Перекласти речення",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      },
+      {
+        "quizName": "Вставити слово",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      }
+    ]
+  },
+  {
+    "url": "lvl-B1",
+    "courseName": "Рівень B1",
+    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "quizzes": [
+      {
+        "quizName": "Тести",
+        "descr": "Потрібно вибрати одну правильну відповідь з декілько варіантів"
+      },
+      {
+        "quizName": "Скласти речення",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      },
+      {
+        "quizName": "Перекласти речення",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      },
+      {
+        "quizName": "Вставити слово",
+        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      }
+    ]
+  }
+]

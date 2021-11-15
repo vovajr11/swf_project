@@ -1,88 +1,181 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { quizzesOperations, quizzesSelectors } from '../../redux/quizzes';
+import { v4 as uuid_v4 } from 'uuid';
+import { quizzesActions, quizzesSelectors } from '../../redux/quizzes/index';
+// import { Tag } from '../../components/Global/Styled';
+import Answer from '../../components/Global';
 
 export class CourseDetailsView extends Component {
   state = {
     currentQuestion: 0,
-    showScore: false,
+    answers: [],
     score: 0,
+    disabled: true,
+    isEnd: false,
+    quizData: this.props.location.state.getQuestions,
+    userResponseOneTest: [],
   };
 
-  nextQuetions() {
-    this.setState(prevState => {
+  loadQuizData = () => {
+    const { quizData } = this.state;
+
+    this.setState(() => {
       return {
-        currentQuestion: prevState.currentQuestion + 1,
+        corectAnswer: quizData[this.state.currentQuestion].corectAnswer,
+        answers: quizData[this.state.currentQuestion].answers,
       };
     });
+  };
+
+  componentDidMount() {
+    this.loadQuizData();
   }
 
-  handleAnswerBtnClick = isCorrect => {
-    const { currentQuestion } = this.state;
-    const questions = this.props.location.state.getQuestions;
+  nextQuestion = () => {
+    const { score, corectAnswer, userResponseOneTest } = this.state;
 
-    if (isCorrect === true) {
-      this.setState(state => {
-        return { score: state.score + 1 };
+    const userAnswer = userResponseOneTest.map(item => item.answer).join(' ');
+
+    // this.props.addUserAnswer(myAnswer); // add userAnswer in state
+
+    if (userAnswer === corectAnswer) {
+      this.setState({
+        score: score + 1,
       });
     }
 
-    let nextQuestion = currentQuestion + 1;
+    this.setState({
+      currentQuestion: this.state.currentQuestion + 1,
+      userResponseOneTest: [],
+    });
+  };
 
-    nextQuestion < questions.length
-      ? this.nextQuetions()
-      : this.setState({ showScore: true });
+  componentDidUpdate(prevProps, prevState) {
+    const { quizData } = this.state;
+    if (this.state.currentQuestion !== prevState.currentQuestion) {
+      this.setState(() => {
+        return {
+          disabled: true,
+          corectAnswer: quizData[this.state.currentQuestion].corectAnswer,
+          answers: quizData[this.state.currentQuestion].answers,
+        };
+      });
+    }
+  }
+
+  userChooseWord = selectedAnswer => {
+    const { userResponseOneTest, answers } = this.state;
+    const { id, answer } = selectedAnswer;
+
+    const newAnswers = answers.filter(item => item.id !== id);
+
+    this.setState({
+      userResponseOneTest: [...userResponseOneTest, { id, answer }],
+      answers: [...newAnswers],
+    });
+  };
+
+  deleteSelectedWord = selectedAnswer => {
+    const { userResponseOneTest, answers } = this.state;
+    const { id, answer } = selectedAnswer;
+
+    const selectedAnswers = userResponseOneTest.filter(item => item.id !== id);
+
+    this.setState({
+      userResponseOneTest: [...selectedAnswers],
+      answers: [...answers, { id, answer }],
+    });
+  };
+
+  finishHandler = () => {
+    const {
+      score,
+      corectAnswer,
+      userResponseOneTest,
+      currentQuestion,
+      quizData,
+    } = this.state;
+
+    if (currentQuestion === quizData.length - 1) {
+      this.setState({
+        isEnd: true,
+      });
+    }
+
+    const userAnswer = userResponseOneTest.map(item => item.answer).join(' ');
+
+    if (corectAnswer === userAnswer) {
+      this.setState({
+        score: this.state.score + 1,
+      });
+    }
   };
 
   render() {
-    const { getQuestions } = this.props.location.state;
-    const { showScore, score, currentQuestion } = this.state;
+    const {
+      isEnd,
+      answers,
+      score,
+      currentQuestion,
+      quizData,
+      userResponseOneTest,
+    } = this.state;
 
-    return (
-      <div>
-        <h1>Course Derails</h1>
-        <div className="app">
-          {showScore ? (
-            <div className="score-section">
-              You scored {score} out of {getQuestions.length}
-            </div>
+    if (isEnd) {
+      return <p>Кінець. Ти набрав {score} балів</p>;
+    } else {
+      return (
+        <div>
+          <h2>Питання номер {currentQuestion + 1}</h2>
+          {answers.length > 0 ? (
+            answers.map(item => (
+              <li key={item.id} onClick={() => this.userChooseWord(item)}>
+                <Answer value="plus" label={item.answer} size={20} />
+              </li>
+            ))
           ) : (
-            <>
-              <div className="question-section">
-                <div className="question-count">
-                  <span>Question {currentQuestion + 1}</span> -{' '}
-                  {getQuestions.length}
-                </div>
-                <div className="question-text">
-                  {getQuestions[currentQuestion].questionText}
-                </div>
-              </div>
+            <p>Ви вибрали всі слова</p>
+          )}
 
-              <div className="answer-section">
-                {getQuestions[currentQuestion].answerOptions.map(
-                  answerOptions => (
-                    <button
-                      onClick={() =>
-                        this.handleAnswerBtnClick(answerOptions.isCorrect)
-                      }
-                    >
-                      {answerOptions.answerText}
-                    </button>
-                  ),
-                )}
-              </div>
-            </>
+          <ul>
+            {userResponseOneTest.length > 0 ? (
+              userResponseOneTest.map(item => (
+                <li key={item.id} onClick={() => this.deleteSelectedWord(item)}>
+                  <Answer value="minus" label={item.answer} size={20} />
+                </li>
+              ))
+            ) : (
+              <p>Виберіть слова</p>
+            )}
+          </ul>
+
+          {currentQuestion < quizData.length - 1 && (
+            <button
+              className="ui inverted button"
+              // disabled={this.state.disabled}
+              onClick={this.nextQuestion}
+            >
+              Next
+            </button>
+          )}
+
+          {currentQuestion === quizData.length - 1 && (
+            <button className="ui inverted button" onClick={this.finishHandler}>
+              Finish
+            </button>
           )}
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
 const mapStateToProps = state => ({
-  getQuestions: quizzesSelectors.getLevel(state),
+  userAnswer: quizzesSelectors.getuserAnswer(state),
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  addUserAnswer: quizzesActions.addUserAnswer,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseDetailsView);

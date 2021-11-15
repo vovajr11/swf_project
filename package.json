@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/vovajr11/swf_project#readme",
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.16",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "concurrently": "^6.3.0",

@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { authOperations } from '../../redux/auth/index';
+import { authOperations } from '../../redux/auth';
 import { Stack, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { Button } from '@chakra-ui/react';
 import AuthNav from '../../components/AuthNav';
 import { LogBox } from '../../components/Global/Styled';
 
-class ReqisterView extends Component {
+class LoginView extends Component {
   state = {
-    username: '',
     email: '',
     password: '',
     show: false,
@@ -25,27 +24,21 @@ class ReqisterView extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const { username, email, password } = this.state;
 
-    this.props.onRegister({ username, email, password });
-    this.setState({ name: '', email: '', password: '' });
+    const { email, password } = this.state;
+
+    this.props.onLogin({ email, password });
+    this.setState({ email: '', password: '' });
   };
+
   render() {
-    const { username, email, password, show } = this.state;
+    const { email, password, show } = this.state;
 
     return (
       <LogBox>
         <AuthNav />
         <form onSubmit={this.handleSubmit}>
           <Stack spacing={4}>
-            <Input
-              placeholder="ПІБ"
-              type="text"
-              name="username"
-              value={username}
-              onChange={this.handleChange}
-            />
-
             <Input
               placeholder="Пошта"
               type="email"
@@ -71,7 +64,7 @@ class ReqisterView extends Component {
             </InputGroup>
 
             <Button colorScheme="blue" type="submit">
-              Реєстрація
+              Вхід
             </Button>
           </Stack>
         </form>
@@ -80,6 +73,4 @@ class ReqisterView extends Component {
   }
 }
 
-export default connect(null, { onRegister: authOperations.register })(
-  ReqisterView,
-);
+export default connect(null, { onLogin: authOperations.logIn })(LoginView);

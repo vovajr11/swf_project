@@ -6,12 +6,16 @@ import quizzesActions from './quizzesActions';
 //   question_item: [],
 // };
 
-// const addQuestions = (state, action) => {
-//   return { ...state, question_item: action.payload };
-// };
+const addUserAnswer = (state, action) => {
+  return [...state, action.payload];
+};
 
 const quizLevel = createReducer([], {
   [quizzesActions.fetchQuizzesSuccess]: (state, action) => action.payload,
+});
+
+const userAnswer = createReducer([], {
+  [quizzesActions.addUserAnswer]: addUserAnswer,
 });
 
 const loading = createReducer(false, {
@@ -22,5 +26,6 @@ const loading = createReducer(false, {
 
 export default combineReducers({
   quizLevel,
+  userAnswer,
   loading,
 });

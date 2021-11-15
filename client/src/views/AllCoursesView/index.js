@@ -1,51 +1,67 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { quizzesOperations, quizzesSelectors } from "../../redux/quizzes";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { quizzesOperations, quizzesSelectors } from '../../redux/quizzes';
+import courseData from './db.json';
+import { Wrapp, Title } from './styled';
+import { Button, Box, Image, Heading, Text } from '@chakra-ui/react';
+import { quizData } from '../CourseDetailsView/dataQuestion';
+
+console.log(quizData, 'quizData');
 
 class AllCoursesView extends Component {
-  componentDidMount() {
-    this.props.onFetchQuizzes();
-  }
-
   render() {
     const { allQuiz, match } = this.props;
 
     return (
-      <div>
-        <h1>AllCourses</h1>
-        <section>
-          <ul>
-            {allQuiz.map(
-              ({ title, author, id, questionCount, time, questionItems }) => (
-                <li key={id}>
-                  <h3>Level course: {title}</h3>
-                  <p>Question Count: {questionCount}</p>
-                  <p>Time {time} minute</p>
-                  <p>Author: {author}</p>
+      <Wrapp>
+        <Title>AllCourses</Title>
 
-                  <button>
-                    <Link
-                      to={{
-                        pathname: `${match.url}/${id}`,
-                        state: { getQuestions: questionItems },
-                      }}
-                    >
-                      Start
-                    </Link>
-                  </button>
-                </li>
-              )
-            )}
-          </ul>
-        </section>
-      </div>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          flexDirection="row"
+          flexWrap="wrap"
+          width="100%"
+        >
+          {courseData.map(({ courseName, descr, quizzes, url }) => (
+            <Box
+              maxW="sm"
+              borderWidth="1px"
+              borderRadius="lg"
+              overflow="hidden"
+              mb="10"
+            >
+              <Image src="https://bit.ly/2Z4KKcF" alt="img" />
+              <Box ml={3}>
+                <Heading fontSize="xl" mt={2}>
+                  {courseName}
+                </Heading>
+                <Text mt={2}>{descr}</Text>
+              </Box>
+
+              <Box textAlign="center" mt={4} mb={4}>
+                <Button colorScheme="teal" variant="solid">
+                  <Link
+                    to={{
+                      pathname: `${match.url}/${url}`,
+                      state: { getQuestions: quizData },
+                    }}
+                  >
+                    Start
+                  </Link>
+                </Button>
+              </Box>
+            </Box>
+          ))}
+        </Box>
+      </Wrapp>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   allQuiz: quizzesSelectors.getLevel(state),
 });
 

@@ -8,6 +8,8 @@ export default [
     exact: true,
     key: 1,
     component: lazy(() => import('./views/HomeView')),
+    private: true,
+    restricted: false,
   },
 
   {
@@ -16,6 +18,8 @@ export default [
     exact: true,
     key: 2,
     component: lazy(() => import('./views/AllCoursesView')),
+    private: true,
+    restricted: false,
   },
 
   {
@@ -24,6 +28,8 @@ export default [
     exact: true,
     key: 3,
     component: lazy(() => import('./views/CourseDetailsView')),
+    private: true,
+    restricted: false,
   },
 
   {
@@ -32,6 +38,8 @@ export default [
     exact: true,
     key: 4,
     component: lazy(() => import('./views/ProfileView/index')),
+    private: true,
+    restricted: false,
   },
 
   {
@@ -40,6 +48,8 @@ export default [
     exact: true,
     key: 5,
     component: lazy(() => import('./views/SettingView')),
+    private: true,
+    restricted: false,
   },
 
   {
@@ -47,7 +57,9 @@ export default [
     label: 'Login',
     exact: true,
     key: 6,
-    component: lazy(() => import('./views/LoginView')),
+    component: lazy(() => import('./views/LoginView/index')),
+    private: false,
+    restricted: true,
   },
 
   {
@@ -56,5 +68,7 @@ export default [
     exact: true,
     key: 7,
     component: lazy(() => import('./views/RegisterView/index')),
+    private: false,
+    restricted: true,
   },
 ];
