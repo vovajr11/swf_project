@@ -18,6 +18,8 @@ userRouter.get(
   userController.getCurrentUser,
 );
 
+userRouter.get('/verify/:token', userController.verifyEmail);
+
 userRouter.put('/sign-in', validationFns.validateSignIn, userController.signIn);
 
 userRouter.patch('/logout', validationFns.authorize, userController.logout);

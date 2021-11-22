@@ -6,9 +6,6 @@ import { quizzesOperations, quizzesSelectors } from '../../redux/quizzes';
 import courseData from './db.json';
 import { Wrapp, Title } from './styled';
 import { Button, Box, Image, Heading, Text } from '@chakra-ui/react';
-import { quizData } from '../CourseDetailsView/dataQuestion';
-
-console.log(quizData, 'quizData');
 
 class AllCoursesView extends Component {
   render() {
@@ -25,7 +22,7 @@ class AllCoursesView extends Component {
           flexWrap="wrap"
           width="100%"
         >
-          {courseData.map(({ courseName, descr, quizzes, url }) => (
+          {courseData.map(({ courseName, descr, url }) => (
             <Box
               maxW="sm"
               borderWidth="1px"
@@ -46,7 +43,6 @@ class AllCoursesView extends Component {
                   <Link
                     to={{
                       pathname: `${match.url}/${url}`,
-                      state: { getQuestions: quizData },
                     }}
                   >
                     Start

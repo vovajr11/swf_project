@@ -2,10 +2,6 @@ import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import quizzesActions from './quizzesActions';
 
-// const initState = {
-//   question_item: [],
-// };
-
 const addUserAnswer = (state, action) => {
   return [...state, action.payload];
 };

@@ -1,12 +1,12 @@
 import { lazy } from 'react';
-
+import { v4 as uuid_v4 } from 'uuid';
 // eslint-disable-next-line import/no-anonymous-default-export
 export default [
   {
     path: '/',
     label: 'Home',
     exact: true,
-    key: 1,
+    key: uuid_v4(),
     component: lazy(() => import('./views/HomeView')),
     private: true,
     restricted: false,
@@ -16,7 +16,7 @@ export default [
     path: '/courses',
     label: 'Courses',
     exact: true,
-    key: 2,
+    key: uuid_v4(),
     component: lazy(() => import('./views/AllCoursesView')),
     private: true,
     restricted: false,
@@ -26,8 +26,30 @@ export default [
     path: '/courses/:courseName',
     label: 'Courses D',
     exact: true,
-    key: 3,
+    key: uuid_v4(),
     component: lazy(() => import('./views/CourseDetailsView')),
+    private: true,
+    restricted: false,
+  },
+
+  {
+    path: '/courses/:courseName/completePuzzle',
+    label: 'Courses D',
+    exact: true,
+    key: uuid_v4(),
+    component: lazy(() =>
+      import('./views/CourseDetailsView/components/CompletePuzzle'),
+    ),
+    private: true,
+    restricted: false,
+  },
+
+  {
+    path: '/courses/:courseName/tests',
+    label: 'Courses D',
+    exact: true,
+    key: uuid_v4(),
+    component: lazy(() => import('./views/CourseDetailsView/components/Tests')),
     private: true,
     restricted: false,
   },
@@ -36,7 +58,7 @@ export default [
     path: '/profile',
     label: 'Propfile',
     exact: true,
-    key: 4,
+    key: uuid_v4(),
     component: lazy(() => import('./views/ProfileView/index')),
     private: true,
     restricted: false,
@@ -46,7 +68,7 @@ export default [
     path: '/setting',
     label: 'Setting',
     exact: true,
-    key: 5,
+    key: uuid_v4(),
     component: lazy(() => import('./views/SettingView')),
     private: true,
     restricted: false,
@@ -56,7 +78,7 @@ export default [
     path: '/login',
     label: 'Login',
     exact: true,
-    key: 6,
+    key: uuid_v4(),
     component: lazy(() => import('./views/LoginView/index')),
     private: false,
     restricted: true,
@@ -66,7 +88,7 @@ export default [
     path: '/register',
     label: 'Register',
     exact: true,
-    key: 7,
+    key: uuid_v4(),
     component: lazy(() => import('./views/RegisterView/index')),
     private: false,
     restricted: true,

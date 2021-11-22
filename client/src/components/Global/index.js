@@ -16,7 +16,7 @@ const Word = styled.button`
 `;
 
 
-const Answer = props => {
+const AnswerItem = props => {
   const { value, label, size } = props;
 
   return (
@@ -38,4 +38,4 @@ const Answer = props => {
   );
 };
 
-export default Answer;
+export default AnswerItem;

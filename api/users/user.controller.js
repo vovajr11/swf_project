@@ -1,11 +1,22 @@
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const uuid = require('uuid');
+const nodemailer = require('nodemailer');
 const userModel = require('./user.model');
 const validationFns = require('../helpers/validationFns');
+const { UnauthorizedError } = require('../helpers/errors.constructor');
 
 class UserController {
   constructor() {
     this._costFactor = 4;
+
+    this._transport = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.NODEMAILER_USER,
+        pass: process.env.NODEMAILER_PASS,
+      },
+    });
   }
 
   get createUser() {
@@ -40,6 +51,8 @@ class UserController {
         password: passwordHash,
       });
 
+      await this.sendVerificationEmail(user);
+
       const token = await this.checkUser(email, password);
 
       return res.status(201).json({
@@ -50,6 +63,40 @@ class UserController {
         },
         token,
       });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async sendVerificationEmail(user) {
+    const verificationToken = uuid.v4();
+
+    await userModel.createVerificationToken(user.id, verificationToken);
+
+    await this._transport.sendMail({
+      from: process.env.NODEMAILER_USER,
+      to: user.email,
+      subject: 'Email verification',
+      html: `<a href="http://localhost:5000/api/users/verify/${verificationToken}">Сюди клікни</a>`,
+    });
+  }
+
+  async verifyEmail(req, res, next) {
+    try {
+      const { token } = req.params;
+
+      console.log(token, 'token');
+
+      const userToVerify = await userModel.findByVerificationToken(token);
+      // if (!userToVerify) {
+      //   throw new NotFoundError('User not found');
+      // }
+
+      console.log(userToVerify, 'userToVerify._id');
+
+      await userModel.verifyUser(userToVerify.id);
+
+      return res.status(200).send('Your user seccessfully verified');
     } catch (err) {
       next(err);
     }
@@ -94,6 +141,7 @@ class UserController {
   async logout(req, res, next) {
     try {
       const user = req.user;
+
       await userModel.updateToken(user._id, null);
 
       return res.status(204).send();
@@ -104,14 +152,14 @@ class UserController {
 
   async checkUser(email, password) {
     const user = await userModel.findUserByEmail(email);
-    if (!user) {
+    if (!user || user.status !== 'Verified') {
       throw new UnauthorizedError('Authentication failed');
     }
 
     const isPasswordValid = await bcryptjs.compare(password, user.password);
-    if (!isPasswordValid) {
-      throw new UnauthorizedError('Authentication failed');
-    }
+    // if (!isPasswordValid) {
+    //   throw new UnauthorizedError('Authentication failed');
+    // }
 
     const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: 2 * 24 * 60 * 60, // two days

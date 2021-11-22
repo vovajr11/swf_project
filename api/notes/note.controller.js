@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const { v4: uuidv4 } = require('uuid');
 const userModel = require('../users/user.model');
 const noteModel = require('../notes/note.model');
 const { NotFoundError } = require('../helpers/errors.constructor');
