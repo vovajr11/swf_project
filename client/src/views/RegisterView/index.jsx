@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect, Link } from 'react-router-dom';
 import { authOperations } from '../../redux/auth/index';
 import { Stack, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { Button } from '@chakra-ui/react';
@@ -12,6 +13,7 @@ class ReqisterView extends Component {
     email: '',
     password: '',
     show: false,
+    redirect: false,
   };
 
   showPassword = () =>
@@ -28,10 +30,10 @@ class ReqisterView extends Component {
     const { username, email, password } = this.state;
 
     this.props.onRegister({ username, email, password });
-    this.setState({ name: '', email: '', password: '' });
+    this.setState({ name: '', email: '', password: '', redirect: true });
   };
   render() {
-    const { username, email, password, show } = this.state;
+    const { username, email, password, show, redirect } = this.state;
 
     return (
       <LogBox>
@@ -73,6 +75,7 @@ class ReqisterView extends Component {
             <Button colorScheme="blue" type="submit">
               Реєстрація
             </Button>
+            {redirect && <Redirect to="/verification" />}
           </Stack>
         </form>
       </LogBox>

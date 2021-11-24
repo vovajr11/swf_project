@@ -93,4 +93,14 @@ export default [
     private: false,
     restricted: true,
   },
+
+  {
+    path: '/verification',
+    label: 'Login',
+    exact: true,
+    key: uuid_v4(),
+    component: lazy(() => import('./views/VerificationView')),
+    private: false,
+    restricted: true,
+  },
 ];

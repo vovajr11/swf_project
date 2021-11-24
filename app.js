@@ -12,6 +12,9 @@ const noteRoutes = require('./api/notes/note.router');
 
 const app = express();
 
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "api/views"));
+
 // CORS Middleware
 app.use(cors());
 // Logger Middleware

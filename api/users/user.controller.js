@@ -92,11 +92,9 @@ class UserController {
       //   throw new NotFoundError('User not found');
       // }
 
-      console.log(userToVerify, 'userToVerify._id');
-
       await userModel.verifyUser(userToVerify.id);
 
-      return res.status(200).send('Your user seccessfully verified');
+      return res.status(200).render('successfulVerification');
     } catch (err) {
       next(err);
     }
