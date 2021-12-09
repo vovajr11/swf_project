@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { UserBox } from './UserMenuStyle';
+import { UserBox, LogoutBtn } from './UserMenuStyle';
 import { authSelectors, authOperations } from '../../../redux/auth';
+
 const UserMenu = ({ name, avatar, onLogout }) => (
   <UserBox>
-    <img src={avatar} alt="User Avatar" width="32" />
-    <span>Welcome, {name}</span>
-    <button type="button" onClick={onLogout}>
+    <div>
+      <img src={avatar} alt="User Avatar" width="32" />
+      <span>Welcome, {name}</span>
+    </div>
+
+    <LogoutBtn type="button" onClick={onLogout}>
       Logout
-    </button>
+    </LogoutBtn>
   </UserBox>
 );
 

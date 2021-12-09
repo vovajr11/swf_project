@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
-  height: 55px;
   padding: 0 20px;
-
-  .logo {
-    padding: 15px 0;
-  }
 `;
 
 export const LogoBox = styled.div`
-  display: flex;
+  h2 {
+    text-align: center;
+    margin: 10px 0 50px 0;
+    font-size: 20px;
+    font-weight: 700;
+  }
 `;

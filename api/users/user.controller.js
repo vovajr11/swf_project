@@ -77,7 +77,8 @@ class UserController {
       from: process.env.NODEMAILER_USER,
       to: user.email,
       subject: 'Email verification',
-      html: `<a href="http://localhost:5000/api/users/verify/${verificationToken}">Сюди клікни</a>`,
+      html: `<h3>Привіт ${user.username}</h3> 
+      <p>Тобі потрібно перейти <a href="${process.env.REACT_APP_API_URL}/users/verify/${verificationToken}" style="color: green; text-decoration: none">Сюди</a> для верифікації профілю</p>`,
     });
   }
 

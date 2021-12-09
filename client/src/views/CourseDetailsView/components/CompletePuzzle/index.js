@@ -6,6 +6,8 @@ import {
 } from '../../../../redux/quizzes/index';
 import CheckingResults from './CheckingResults';
 import AnswerItem from '../../../../components/Global';
+import { QuizzesWrapper, Answers, UserAnswers } from './CompletePuzzleStyled';
+import { Button } from '@chakra-ui/react';
 
 export class CompletePuzzle extends Component {
   state = {
@@ -44,6 +46,13 @@ export class CompletePuzzle extends Component {
       userResponseOneTest: [...userResponseOneTest, { id, answer }],
       answers: [...newAnswers],
     });
+
+    if (answers.length - 1 === 0) {
+      // - 1 because the state is updated later
+      this.setState({
+        disabled: false,
+      });
+    }
   };
 
   deleteSelectedWord = selectedAnswer => {
@@ -68,6 +77,8 @@ export class CompletePuzzle extends Component {
 
     const userAnswer = userResponseOneTest.map(item => item.answer).join(' ');
 
+    this.props.addUserAnswer(userAnswer);
+
     if (userAnswer === corectAnswer) {
       this.setState({
         score: score + 1,
@@ -83,13 +94,12 @@ export class CompletePuzzle extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { quizData } = this.state;
+
     if (this.state.currentQuestion !== prevState.currentQuestion) {
-      this.setState(() => {
-        return {
-          disabled: true,
-          corectAnswer: quizData[this.state.currentQuestion].corectAnswer,
-          answers: quizData[this.state.currentQuestion].answers,
-        };
+      this.setState({
+        disabled: true,
+        corectAnswer: quizData[this.state.currentQuestion].corectAnswer,
+        answers: quizData[this.state.currentQuestion].answers,
       });
     }
   }
@@ -111,6 +121,8 @@ export class CompletePuzzle extends Component {
     }
 
     const userAnswer = userResponseOneTest.map(item => item.answer).join(' ');
+
+    this.props.addUserAnswer(userAnswer);
 
     this.setState({
       userResponsesToEntireTest: [...userResponsesToEntireTest, userAnswer],
@@ -143,19 +155,23 @@ export class CompletePuzzle extends Component {
       );
     } else {
       return (
-        <div>
+        <QuizzesWrapper>
           <h2>Питання номер {currentQuestion + 1}</h2>
-          {answers.length > 0 ? (
-            answers.map(item => (
-              <li key={item.id} onClick={() => this.userChooseWord(item)}>
-                <AnswerItem value="plus" label={item.answer} size={20} />
-              </li>
-            ))
-          ) : (
-            <p>Ви вибрали всі слова</p>
-          )}
+          <Answers>
+            {answers.length > 0 ? (
+              answers.map(item => (
+                <li key={item.id} onClick={() => this.userChooseWord(item)}>
+                  <AnswerItem value="plus" label={item.answer} size={20} />
+                </li>
+              ))
+            ) : (
+              <p>Ви вибрали всі слова</p>
+            )}
+          </Answers>
 
-          <ul>
+          {answers.length > 0 ? <hr /> : ''}
+
+          <UserAnswers>
             {userResponseOneTest.length > 0 ? (
               userResponseOneTest.map(item => (
                 <li key={item.id} onClick={() => this.deleteSelectedWord(item)}>
@@ -165,16 +181,18 @@ export class CompletePuzzle extends Component {
             ) : (
               <p>Виберіть слова</p>
             )}
-          </ul>
+          </UserAnswers>
+
+          {userResponseOneTest.length > 0 ? <hr /> : ''}
 
           {currentQuestion < quizData.length - 1 && (
-            <button
-              className="ui inverted button"
-              // disabled={this.state.disabled}
+            <Button
+              colorScheme="blue"
+              disabled={this.state.disabled}
               onClick={this.nextQuestion}
             >
               Next
-            </button>
+            </Button>
           )}
 
           {currentQuestion === quizData.length - 1 && (
@@ -182,18 +200,14 @@ export class CompletePuzzle extends Component {
               Finish
             </button>
           )}
-        </div>
+        </QuizzesWrapper>
       );
     }
   }
 }
 
-const mapStateToProps = state => ({
-  userAnswer: quizzesSelectors.getuserAnswer(state),
-});
-
 const mapDispatchToProps = {
   addUserAnswer: quizzesActions.addUserAnswer,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompletePuzzle);
+export default connect(null, mapDispatchToProps)(CompletePuzzle);

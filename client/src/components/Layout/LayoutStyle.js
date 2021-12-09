@@ -6,6 +6,5 @@ export const Wrapp = styled.div`
 
   ul {
     list-style: none;
-    padding: 0;
   }
 `;

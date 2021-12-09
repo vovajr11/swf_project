@@ -5,6 +5,19 @@ import {
   quizzesActions,
   quizzesSelectors,
 } from '../../../../redux/quizzes/index';
+import {
+  QuizzesWrapper,
+  Question,
+  NumberQuestion,
+  Answer,
+  Next,
+  Result,
+  QuestionInfoItem,
+  ViewAnswer,
+  UserAnswer,
+} from './TestStyled';
+
+import { Button } from '@chakra-ui/react';
 
 export class Tests extends Component {
   state = {
@@ -15,6 +28,7 @@ export class Tests extends Component {
     disabled: true,
     isEnd: false,
     quizData: this.props.location.state.getQuestions,
+    currentAnswer: null,
   };
 
   loadQuizData = () => {
@@ -46,6 +60,7 @@ export class Tests extends Component {
 
     this.setState({
       currentQuestion: this.state.currentQuestion + 1,
+      currentAnswer: null,
     });
   };
 
@@ -64,7 +79,7 @@ export class Tests extends Component {
   }
 
   checkAnswer = answer => {
-    this.setState({ myAnswer: answer, disabled: false });
+    this.setState({ myAnswer: answer, disabled: false, currentAnswer: answer });
   };
 
   finishHandler = () => {
@@ -85,72 +100,101 @@ export class Tests extends Component {
   };
 
   render() {
-    const { options, myAnswer, currentQuestion, isEnd, quizData } = this.state;
+    const {
+      options,
+      currentAnswer,
+      currentQuestion,
+      isEnd,
+      quizData,
+      disabled,
+    } = this.state;
     const { userAnswer } = this.props;
 
     if (isEnd) {
       return (
-        <div className="result">
-          <h3>Game Over your Final score is {this.state.score} points </h3>
-          <div style={{ display: 'flex' }}>
-            <ul>
-              {quizData.map((item, idx) => (
-                <li className="ui floating message options" key={idx}>
+        <Result>
+          <h3>
+            Тест закінчився ти набрав {this.state.score} з {quizData.length}{' '}
+            балів
+          </h3>
+
+          <ul>
+            {quizData.map((item, idx) => (
+              <QuestionInfoItem
+                className="ui floating message options"
+                key={idx}
+              >
+                <div>
                   <h5>{item.question}</h5>
                   <ul>
-                    {item.options.map(item => (
-                      <li key={uuid_v4()}>{item}</li>
+                    {item.options.map(answer => (
+                      <ViewAnswer
+                        key={uuid_v4()}
+                        className={item.answer === answer ? 'correct' : 'wrong'}
+                      >
+                        {answer}
+                      </ViewAnswer>
                     ))}
                   </ul>
-                </li>
-              ))}
-            </ul>
-            <ul>
-              {userAnswer.map((item, idx) => (
-                <li key={idx}>My Answer: {item}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+                </div>
+
+                <UserAnswer>
+                  Your answer:
+                  <span
+                    className={
+                      item.answer === userAnswer[idx]
+                        ? 'correct-answer'
+                        : 'wrong-answer'
+                    }
+                  >
+                    {userAnswer[idx]}
+                  </span>
+                </UserAnswer>
+              </QuestionInfoItem>
+            ))}
+          </ul>
+        </Result>
       );
     } else {
       return (
-        <div>
-          <h1>{this.state.questions} </h1>
+        <QuizzesWrapper>
+          <Question>{this.state.questions} </Question>
 
-          <span>{`Questions ${currentQuestion}  out of ${
-            quizData.length - 1
-          } remaining `}</span>
+          <NumberQuestion>{`${currentQuestion + 1} of ${
+            quizData.length
+          } question `}</NumberQuestion>
 
-          {options.map(option => (
-            <p key={uuid_v4()} onClick={() => this.checkAnswer(option)}>
-              {option}
-            </p>
-          ))}
+          <ul>
+            {options.map(option => (
+              <Answer
+                className={currentAnswer === option ? 'active' : ''}
+                key={uuid_v4()}
+                onClick={() => this.checkAnswer(option)}
+              >
+                {option}
+              </Answer>
+            ))}
+          </ul>
 
           {currentQuestion < quizData.length - 1 && (
-            <button
-              className="ui inverted button"
-              disabled={this.state.disabled}
-              onClick={this.nextQuestion}
-            >
+            <Next disabled={disabled} onClick={this.nextQuestion}>
               Next
-            </button>
+            </Next>
           )}
 
           {currentQuestion === quizData.length - 1 && (
-            <button className="ui inverted button" onClick={this.finishHandler}>
+            <Button colorScheme="teal" size="sm" onClick={this.finishHandler}>
               Finish
-            </button>
+            </Button>
           )}
-        </div>
+        </QuizzesWrapper>
       );
     }
   }
 }
 
 const mapStateToProps = state => ({
-  userAnswer: quizzesSelectors.getuserAnswer(state),
+  userAnswer: quizzesSelectors.getAllUserAnswer(state),
 });
 
 const mapDispatchToProps = {

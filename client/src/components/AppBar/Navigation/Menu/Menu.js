@@ -5,12 +5,6 @@ import { burgerAction } from '../../../../redux/burgerMenu';
 
 const routes = [
   {
-    path: '/',
-    label: 'Home',
-    exact: true,
-  },
-
-  {
     path: '/courses',
     label: 'Courses',
     exact: true,
@@ -19,12 +13,6 @@ const routes = [
   {
     path: '/profile',
     label: 'Propfile',
-    exact: true,
-  },
-
-  {
-    path: '/setting',
-    label: 'Setting',
     exact: true,
   },
 ];

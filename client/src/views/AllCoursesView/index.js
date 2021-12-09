@@ -10,7 +10,7 @@ import { Button, Box, Image, Heading, Text } from '@chakra-ui/react';
 class AllCoursesView extends Component {
   render() {
     const { allQuiz, match } = this.props;
-
+    console.log(courseData.length, 'courseData.length');
     return (
       <Wrapp>
         <Title>AllCourses</Title>
