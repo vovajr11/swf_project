@@ -31,7 +31,7 @@ class ProfileView extends Component {
               width={250}
             />
           </div>
-          
+
           <UserData>
             <UserName>{username}</UserName>
             <UserMail>{email}</UserMail>
@@ -46,6 +46,7 @@ class ProfileView extends Component {
     );
   }
 }
+
 
 const mapStateToProps = state => ({
   userInfo: authSelectors.getUserInfo(state),
