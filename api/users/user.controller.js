@@ -6,12 +6,24 @@ const userModel = require('./user.model');
 const validationFns = require('../helpers/validationFns');
 const { UnauthorizedError } = require('../helpers/errors.constructor');
 
+// pool: true,
+// host: "smtp.example.com",
+// port: 465,
+// secure: true, // use TLS
+// auth: {
+//   user: "username",
+//   pass: "password",
+// },
+
 class UserController {
   constructor() {
     this._costFactor = 4;
 
     this._transport = nodemailer.createTransport({
-      service: 'gmail',
+      pool: true,
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.NODEMAILER_USER,
         pass: process.env.NODEMAILER_PASS,
@@ -45,6 +57,8 @@ class UserController {
         return res.status(409).send('User with such email already exists');
       }
 
+      console.log(process.env.NODEMAILER_USER, 'process.env.NODEMAILER_USER');
+
       const user = await userModel.create({
         username,
         email,
@@ -77,16 +91,61 @@ class UserController {
       from: process.env.NODEMAILER_USER,
       to: user.email,
       subject: 'Email verification',
-      html: `<h3>Привіт ${user.username}</h3> 
-      <p>Тобі потрібно перейти <a href="${process.env.REACT_APP_API_URL}/users/verify/${verificationToken}" style="color: green; text-decoration: none">Сюди</a> для верифікації профілю</p>`,
+      html: `<a href="${process.env.REACT_APP_API_URL}/users/verify/${verificationToken}">Сюди клікни</a>`,
     });
   }
+
+
+  // async _createUser(req, res, next) {
+  //   try {
+  //     const { password, username, email } = req.body;
+  //     const passwordHash = await bcryptjs.hash(password, this._costFactor);
+
+  //     const existingUser = await userModel.findUserByEmail(email);
+  //     if (existingUser) {
+  //       return res.status(409).send('User with such email already exists');
+  //     }
+
+  //     const user = await userModel.create({
+  //       username,
+  //       email,
+  //       password: passwordHash,
+  //     });
+
+  //     await this.sendVerificationEmail(user);
+
+  //     const token = await this.checkUser(email, password);
+
+  //     return res.status(201).json({
+  //       user: {
+  //         username: user.username,
+  //         email: user.email,
+  //         id: user._id,
+  //       },
+  //       token,
+  //     });
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // }
+
+  // async sendVerificationEmail(user) {
+  //   const verificationToken = uuid.v4();
+
+  //   await userModel.createVerificationToken(user.id, verificationToken);
+
+  //   await this._transport.sendMail({
+  //     from: process.env.NODEMAILER_USER,
+  //     to: user.email,
+  //     subject: 'Email verification',
+  //     html: `<h3>Hello ${user.username}</h3>
+  //     <p>You need to go <a href="http://localhost:5000/api/users/verify/${verificationToken}" style="color: green; text-decoration: none; font-weight: 700">Here</a> to verify your profile</p>`,
+  //   });
+  // }
 
   async verifyEmail(req, res, next) {
     try {
       const { token } = req.params;
-
-      console.log(token, 'token');
 
       const userToVerify = await userModel.findByVerificationToken(token);
       // if (!userToVerify) {

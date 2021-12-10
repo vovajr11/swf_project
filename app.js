@@ -12,9 +12,6 @@ const noteRoutes = require('./api/notes/note.router');
 
 const app = express();
 
-app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "api/views"));
-
 // CORS Middleware
 app.use(cors());
 // Logger Middleware
@@ -22,6 +19,9 @@ app.use(morgan('dev'));
 
 // Bodyparser Middleware
 app.use(bodyParser.json());
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'api/views'));
 
 // DB Config
 const db = process.env.MONGODB_URL;
