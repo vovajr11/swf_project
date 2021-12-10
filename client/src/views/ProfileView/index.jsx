@@ -31,6 +31,7 @@ class ProfileView extends Component {
               width={250}
             />
           </div>
+          
           <UserData>
             <UserName>{username}</UserName>
             <UserMail>{email}</UserMail>
