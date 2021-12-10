@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuid_v4 } from 'uuid';
+import { Input, Button } from '@chakra-ui/react';
 import { noteOperations } from '../../../../redux/notes';
+import { VocabularyLabel } from './AddWordToVocabularyStyled';
 
 class AddNote extends Component {
   state = {
@@ -24,27 +26,29 @@ class AddNote extends Component {
   render() {
     return (
       <form className="TaskEditor" onSubmit={this.handleSubmit}>
-        <label className="TaskEditor-label">
+        <VocabularyLabel>
           Word
-          <input
+          <Input
             name="word"
             type="text"
             value={this.state.word}
             onChange={this.handleChange}
           />
-        </label>
+        </VocabularyLabel>
 
-        <label className="TaskEditor-label">
+        <VocabularyLabel className="TaskEditor-label">
           Translated word
-          <input
+          <Input
             name="translatedWord"
             type="text"
             value={this.state.translatedWord}
             onChange={this.handleChange}
           />
-        </label>
+        </VocabularyLabel>
 
-        <button type="submit">Добавить слово</button>
+        <Button type="submit" colorScheme="blue">
+          Добавить слово
+        </Button>
       </form>
     );
   }

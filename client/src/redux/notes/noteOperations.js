@@ -12,7 +12,6 @@ const addNote = noteData => (dispatch, getState) => {
   axios
     .put(`/notes/${id}`, { noteData })
     .then(({ data }) => {
-      console.log(noteData, 'noteData');
       dispatch(notesActions.addNoteSuccess(noteData));
     })
     .catch(error => dispatch(notesActions.addNoteError(error)));

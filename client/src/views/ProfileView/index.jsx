@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { authSelectors } from '../../redux/auth';
 import { noteSelectors, noteOperations } from '../../redux/notes';
-import AddNote from './components/AddNote';
-import NoteList from './components/NoteList/index.jsx';
-import { UserInfo } from './ProfileStyled';
-
-import './tr.css';
+import AddNote from './components/AddNote/index';
+import NoteList from './components/NoteList';
+import {
+  UserProfile,
+  UserInfo,
+  UserData,
+  UserPhoto,
+  UserName,
+  UserMail,
+  NotesWrapp,
+} from './ProfileStyled';
 
 class ProfileView extends Component {
   componentDidMount() {
@@ -13,33 +20,38 @@ class ProfileView extends Component {
   }
 
   render() {
+    const { username, email } = this.props.userInfo;
     return (
-      <div>
+      <UserProfile>
         <UserInfo>
           <div>
-            <img
+            <UserPhoto
               src="https://html5css.ru/howto/img_avatar.png"
               alt=""
               width={250}
             />
           </div>
-          <div>
-            <h2>Name</h2>
-            <p>Email</p>
-          </div>
+          <UserData>
+            <UserName>{username}</UserName>
+            <UserMail>{email}</UserMail>
+          </UserData>
         </UserInfo>
-        <div>
-          <h1>Notes</h1>
+        <h3>Твої нотатки</h3>
+        <NotesWrapp>
           <AddNote />
           <NoteList />
-        </div>
-      </div>
+        </NotesWrapp>
+      </UserProfile>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  userInfo: authSelectors.getUserInfo(state),
+});
 
 const mapDispatchToProps = {
   fetchNotes: noteOperations.fetchNoteForUser,
 };
 
-export default connect(null, mapDispatchToProps)(ProfileView);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileView);

@@ -1,15 +1,26 @@
 import React from 'react';
+import {
+  WordItem,
+  WordItemInfo,
+  Word,
+  TranslatedWord,
+  DeleteWord,
+} from './NoteListStyled';
 
 const NoteListItem = ({ word, translatedWord, onRemove }) => {
   return (
-    <li>
-      <p>Word {word}</p>
-      <p>Translate {translatedWord}</p>
+    <WordItem>
+      <WordItemInfo>
+        <p>
+          <Word>{translatedWord}</Word> |{' '}
+          <TranslatedWord>{word}</TranslatedWord>
+        </p>
 
-      <button type="button" onClick={onRemove}>
-        Удалить
-      </button>
-    </li>
+        <DeleteWord type="button" onClick={onRemove}>
+          X
+        </DeleteWord>
+      </WordItemInfo>
+    </WordItem>
   );
 };
 
