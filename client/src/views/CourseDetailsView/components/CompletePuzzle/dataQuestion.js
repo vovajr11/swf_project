@@ -6,87 +6,87 @@ export const quizData = [
     answers: [
       {
         id: uuid_v4(),
-        answer: 'my',
+        answer: 'mi',
       },
       {
         id: uuid_v4(),
-        answer: 'Vova',
+        answer: 'Hola',
       },
       {
         id: uuid_v4(),
-        answer: 'Hello',
+        answer: 'nombre',
       },
       {
         id: uuid_v4(),
-        answer: 'name',
+        answer: 'es',
+      },
+      {
+        id: uuid_v4(),
+        answer: 'vova',
       },
     ],
-    corectAnswer: `Hello my name Vova`,
+    corectAnswer: `Hola mi nombre es vova`,
   },
   {
     id: 1,
     answers: [
       {
         id: uuid_v4(),
-        answer: 'my',
+        answer: 'su',
       },
       {
         id: uuid_v4(),
-        answer: 'Petro',
+        answer: 'es',
       },
       {
         id: uuid_v4(),
-        answer: 'Hello',
+        answer: 'Cuál',
       },
       {
         id: uuid_v4(),
-        answer: 'name',
+        answer: 'nombre',
       },
     ],
-    corectAnswer: `Hello my name Petro`,
+    corectAnswer: `Cuál es su nombre`,
   },
   {
     id: 3,
     answers: [
       {
         id: uuid_v4(),
-        answer: 'my',
+        answer: 'Cuantos',
       },
       {
         id: uuid_v4(),
-        answer: 'Ivan',
+        answer: 'tienes',
       },
       {
         id: uuid_v4(),
-        answer: 'Hello',
-      },
-      {
-        id: uuid_v4(),
-        answer: 'name',
+        answer: 'años',
       },
     ],
-    corectAnswer: `Hello my name Ivan`,
+    corectAnswer: `Cuantos años tienes`,
   },
   {
     id: 4,
     answers: [
       {
         id: uuid_v4(),
-        answer: 'my',
+        answer: 'vas',
       },
       {
         id: uuid_v4(),
-        answer: 'Roman',
+        answer: 'Tú',
       },
       {
         id: uuid_v4(),
-        answer: 'Hello',
+        answer: 'a la',
       },
       {
         id: uuid_v4(),
-        answer: 'name',
+        answer: 'escuela',
       },
     ],
-    corectAnswer: `Hello my name Roman`,
+    corectAnswer: `Tú vas a la escuela`,
   },
 ];

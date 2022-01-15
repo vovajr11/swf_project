@@ -191,13 +191,13 @@ export class CompletePuzzle extends Component {
               disabled={this.state.disabled}
               onClick={this.nextQuestion}
             >
-              Next
+              Далі
             </Button>
           )}
 
           {currentQuestion === quizData.length - 1 && (
             <button className="ui inverted button" onClick={this.finishHandler}>
-              Finish
+              Кінець
             </button>
           )}
         </QuizzesWrapper>

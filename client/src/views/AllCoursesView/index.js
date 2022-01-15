@@ -3,17 +3,19 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { quizzesOperations, quizzesSelectors } from '../../redux/quizzes';
+import { authSelectors } from '../../redux/auth';
 import courseData from './db.json';
 import { Wrapp, Title } from './styled';
 import { Button, Box, Image, Heading, Text } from '@chakra-ui/react';
+import courseImg from '../../img/courseImg.png';
 
 class AllCoursesView extends Component {
   render() {
-    const { allQuiz, match } = this.props;
-    console.log(courseData.length, 'courseData.length');
+    const { allQuiz, match, userInfo } = this.props;
+
     return (
       <Wrapp>
-        <Title>AllCourses</Title>
+        <Title>Всі курси</Title>
 
         <Box
           display="flex"
@@ -30,7 +32,7 @@ class AllCoursesView extends Component {
               overflow="hidden"
               mb="10"
             >
-              <Image src="https://bit.ly/2Z4KKcF" alt="img" />
+              <Image src={courseImg} alt="courseImg" width={382} />
               <Box ml={3}>
                 <Heading fontSize="xl" mt={2}>
                   {courseName}
@@ -45,7 +47,7 @@ class AllCoursesView extends Component {
                       pathname: `${match.url}/${url}`,
                     }}
                   >
-                    Start
+                    Перейти
                   </Link>
                 </Button>
               </Box>
@@ -59,6 +61,7 @@ class AllCoursesView extends Component {
 
 const mapStateToProps = state => ({
   allQuiz: quizzesSelectors.getLevel(state),
+  userInfo: authSelectors.getUserInfo(state),
 });
 
 const mapDispatchToProps = {

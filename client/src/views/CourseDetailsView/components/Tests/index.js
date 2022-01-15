@@ -139,7 +139,7 @@ export class Tests extends Component {
                 </div>
 
                 <UserAnswer>
-                  Your answer:
+                  Твоя відоповідь:
                   <span
                     className={
                       item.answer === userAnswer[idx]
@@ -178,13 +178,13 @@ export class Tests extends Component {
 
           {currentQuestion < quizData.length - 1 && (
             <Next disabled={disabled} onClick={this.nextQuestion}>
-              Next
+              Далі
             </Next>
           )}
 
           {currentQuestion === quizData.length - 1 && (
             <Button colorScheme="teal" size="sm" onClick={this.finishHandler}>
-              Finish
+              Фініш
             </Button>
           )}
         </QuizzesWrapper>

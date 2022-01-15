@@ -8,6 +8,8 @@ require('dotenv').config();
 
 const userRoutes = require('./api/users/user.router');
 const noteRoutes = require('./api/notes/note.router');
+const newsRoutes = require('./api/news/news.router');
+const courseRoutes = require('./api/courses/course.route');
 
 const app = express();
 
@@ -21,19 +23,21 @@ app.set('views', path.join(__dirname, 'api/views'));
 const db = process.env.MONGODB_URL;
 
 mongoose
-  .connect(db)
-  .then(() => console.log('MongoDB Connected...'))
-  .catch(err => console.log(err));
+    .connect(db)
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.log(err));
 
 app.use('/api/users', userRoutes);
 app.use('/api/notes', noteRoutes);
+app.use('/api/news', newsRoutes);
+app.use('/api/course', courseRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+    app.use(express.static('client/build'));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
 }
 
 module.exports = app;

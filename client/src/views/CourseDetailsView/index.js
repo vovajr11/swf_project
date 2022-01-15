@@ -32,7 +32,7 @@ export class CourseDetailsView extends Component {
                   state: { getQuestions: quizData },
                 }}
               >
-                Complete Puzzle
+                Скласти пазл
               </Link>
             </Button>
           </TestItem>
@@ -50,7 +50,7 @@ export class CourseDetailsView extends Component {
                   state: { getQuestions: testsData },
                 }}
               >
-                Tests
+                Тести
               </Link>
             </Button>
           </TestItem>

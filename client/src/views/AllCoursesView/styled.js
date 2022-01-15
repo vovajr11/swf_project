@@ -4,7 +4,7 @@ export const Wrapp = styled.section`
   position: absolute;
   height: auto;
   width: 1400px;
-  top: 100%;
+  top: 65%;
   left: 58%;
   transform: translate(-50%, -50%);
 `;

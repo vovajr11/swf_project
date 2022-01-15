@@ -7,11 +7,11 @@ const UserMenu = ({ name, avatar, onLogout }) => (
   <UserBox>
     <div>
       <img src={avatar} alt="User Avatar" width="32" />
-      <span>Welcome, {name}</span>
+      <span>Привіт, {name}</span>
     </div>
 
     <LogoutBtn type="button" onClick={onLogout}>
-      Logout
+      Вийти
     </LogoutBtn>
   </UserBox>
 );

@@ -1,8 +1,8 @@
 [
   {
     "url": "lvl-A0",
-    "courseName": "Рівень А0",
-    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "courseName": "Рівень А1",
+    "descr": "Базовий рівень – той етап, з якого починається вивчення іспанської мови.",
     "quizzes": [
       {
         "id": 0,
@@ -33,118 +33,64 @@
 
   {
     "url": "lvl-A1",
-    "courseName": "Рівень А1",
-    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "courseName": "Рівень А2",
+    "descr": "Студент, що оволодів цим рівнем, сприймає фрази і речення на іноземній мові",
     "quizzes": [
       {
-        "quizName": "Тести",
-        "descr": "Потрібно вибрати одну правильну відповідь з декілько варіантів"
+        "id": 0,
+        "question": "Як перекладається: Hola ?",
+        "options": ["Hola", "Buenas noches", "Mañana"],
+        "answer": "Hola"
       },
       {
-        "quizName": "Скласти речення",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+        "id": 1,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
       },
       {
-        "quizName": "Перекласти речення",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+        "id": 2,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
       },
       {
-        "quizName": "Вставити слово",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+        "id": 3,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
       }
     ]
   },
 
   {
     "url": "lvl-A2",
-    "courseName": "Рівень А2",
-    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "courseName": "Рівень А3",
+    "descr": "Знання цього курсу спрямовані на освоєння студентом основних навичок спілкування з іспаномовним співрозмовником",
     "quizzes": [
       {
-        "quizName": "Тести",
-        "descr": "Потрібно вибрати одну правильну відповідь з декілько варіантів"
+        "id": 0,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
       },
       {
-        "quizName": "Скласти речення",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+        "id": 1,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
       },
       {
-        "quizName": "Перекласти речення",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+        "id": 2,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
       },
       {
-        "quizName": "Вставити слово",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-      }
-    ]
-  },
-
-  {
-    "url": "lvl-B1",
-    "courseName": "Рівень B1",
-    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "quizzes": [
-      {
-        "quizName": "Тести",
-        "descr": "Потрібно вибрати одну правильну відповідь з декілько варіантів"
-      },
-      {
-        "quizName": "Скласти речення",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-      },
-      {
-        "quizName": "Перекласти речення",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-      },
-      {
-        "quizName": "Вставити слово",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-      }
-    ]
-  },
-  {
-    "url": "lvl-B1",
-    "courseName": "Рівень B1",
-    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "quizzes": [
-      {
-        "quizName": "Тести",
-        "descr": "Потрібно вибрати одну правильну відповідь з декілько варіантів"
-      },
-      {
-        "quizName": "Скласти речення",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-      },
-      {
-        "quizName": "Перекласти речення",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-      },
-      {
-        "quizName": "Вставити слово",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-      }
-    ]
-  },
-  {
-    "url": "lvl-B1",
-    "courseName": "Рівень B1",
-    "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "quizzes": [
-      {
-        "quizName": "Тести",
-        "descr": "Потрібно вибрати одну правильну відповідь з декілько варіантів"
-      },
-      {
-        "quizName": "Скласти речення",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-      },
-      {
-        "quizName": "Перекласти речення",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-      },
-      {
-        "quizName": "Вставити слово",
-        "descr": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+        "id": 3,
+        "question": "What is the Capital Of India ?",
+        "options": ["New Delhi", "Mumbai", "Kolkatta"],
+        "answer": "New Delhi"
       }
     ]
   }

@@ -6,13 +6,13 @@ import { burgerAction } from '../../../../redux/burgerMenu';
 const routes = [
   {
     path: '/courses',
-    label: 'Courses',
+    label: 'Курси',
     exact: true,
   },
 
   {
     path: '/profile',
-    label: 'Propfile',
+    label: 'Профіль',
     exact: true,
   },
 ];

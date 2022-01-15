@@ -1,8 +1,8 @@
 import axios from 'axios';
 import authActions from './authActions';
 
-// axios.defaults.baseURL = "http://localhost:5000/api";
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = "http://localhost:5000/api";
+// axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 const token = {
   set(token) {

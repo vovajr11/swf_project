@@ -48,6 +48,6 @@ export const LinkElem = styled(NavLink)`
     transition: 200ms linear;
     background-color: white;
     border-radius: 10px;
-    padding: 10px 100px;
+    padding: 10px 80px;
   }
 `;
