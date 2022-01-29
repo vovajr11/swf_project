@@ -5,7 +5,6 @@ import { fetchCourses } from '../../services/courseApi';
 import {
     Wrapp,
     Title,
-    ImgDiv,
     CourseList,
     CourseItem,
     LeftItem,
