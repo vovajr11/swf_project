@@ -23,7 +23,7 @@ export default [
     },
 
     {
-        path: '/courses/:courseName',
+        path: '/courses/:courseName/:courseId',
         label: 'Courses D',
         exact: true,
         key: uuid_v4(),
@@ -33,25 +33,11 @@ export default [
     },
 
     {
-        path: '/courses/:courseName/completePuzzle',
+        path: '/courses/:courseName/:courseId/chapterId::chapterId',
         label: 'Courses D',
         exact: true,
         key: uuid_v4(),
-        component: lazy(() =>
-            import('./views/CourseDetailsView/components/CompletePuzzle'),
-        ),
-        private: true,
-        restricted: false,
-    },
-
-    {
-        path: '/courses/:courseName/tests',
-        label: 'Courses D',
-        exact: true,
-        key: uuid_v4(),
-        component: lazy(() =>
-            import('./views/CourseDetailsView/components/Tests'),
-        ),
+        component: lazy(() => import('./views/ChapterDetailsView')),
         private: true,
         restricted: false,
     },

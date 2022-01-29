@@ -1,33 +1,41 @@
 import styled from 'styled-components';
 
-export const Title = styled.h1`
-  text-align: center;
-  font-size: 25px;
-  margin: 20px 0;
+export const Wrapp = styled.section`
+    flex-grow: 2;
 `;
 
-export const TestList = styled.ul`
-  display: flex;
+export const Title = styled.h3`
+    font-size: 30px;
+    margin: 20px 0;
 `;
-export const TestItem = styled.li`
-  margin-right: 50px;
-  width: 500px;
-  text-align: center;
-  border: 1px solid #bdbdbd;
-  border-radius: 5px;
-  padding: 35px 15px;
-  p {
-    padding: 5px;
-  }
-  div {
+
+export const ModuleList = styled.ul`
+    width: 1200px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-    margin-bottom: 30px;
-  }
+    flex-wrap: wrap;
 `;
 
-export const TestItemImg = styled.img`
-  height: auto;
+export const ModuleItem = styled.li`
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    padding: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-basis: calc((100% - 160px) / 3);
+    margin-right: 20px;
+
+    &:nth-child(3n) {
+        margin-right: 0;
+    }
 `;
+
+export const LeftItem = styled.div`
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+        width: 100px;
+        text-align: center;
+    }
+`;
+
+export const RightItem = styled.div``;

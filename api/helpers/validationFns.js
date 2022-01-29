@@ -16,8 +16,6 @@ class Validation {
             // 2. витягнути id користувача з пейлоада або вернути користувачу
             // помилку зі статус кодом 401
 
-            console.log(token, 'token');
-
             let userId;
             try {
                 userId = await jwt.verify(token, process.env.JWT_SECRET).id;
@@ -58,6 +56,17 @@ class Validation {
     }
 
     prepareCoursesResponse(courses) {
+        return courses.map(course => {
+            const { _id, courseName, courseDescription } = course;
+            return {
+                id: _id,
+                courseName,
+                courseDescription,
+            };
+        });
+    }
+
+    prepareCourseDetailsResponse(courses) {
         return courses.map(course => {
             const { _id, courseName, courseDescription, courseModules } =
                 course;

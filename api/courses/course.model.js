@@ -12,7 +12,12 @@ const courseSchema = new Schema({
 
 const moduleSchema = new Schema({
     moduleName: { type: String, required: true },
-    chapters: [],
+    chapters: [
+        {
+            chapterId: { type: String, ref: 'Chapters' },
+            chapterName: { type: String, required: true },
+        },
+    ],
 });
 
 const chapterSchema = new Schema({

@@ -7,8 +7,6 @@ const NewsItem = styled.li`
     border: 1px solid red;
 `;
 
-axios.defaults.baseURL = 'http://localhost:5000/api/';
-
 const News = () => {
     const [news, setNews] = useState([]);
 

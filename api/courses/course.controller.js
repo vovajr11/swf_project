@@ -27,7 +27,7 @@ class CourseController {
         }
     }
 
-    async getCourse(req, res, next) {
+    async getCompleteInfoAboutCourses(req, res, next) {
         try {
             const courses = await courseModel.find().populate({
                 path: 'courseModules',
@@ -36,7 +36,35 @@ class CourseController {
 
             return res
                 .status(200)
+                .json(validationFns.prepareCourseDetailsResponse(courses));
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async getCourse(req, res, next) {
+        try {
+            const courses = await courseModel.find();
+
+            return res
+                .status(200)
                 .json(validationFns.prepareCoursesResponse(courses));
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async getCourseById(req, res, next) {
+        try {
+            const course = await courseModel.findById(req.params.id).populate({
+                path: 'courseModules',
+                select: ['moduleName', 'chapters'],
+            });
+
+            return res.status(200).json({
+                courseName: course.courseName,
+                courseModules: course.courseModules,
+            });
         } catch (err) {
             next(err);
         }
@@ -71,21 +99,35 @@ class CourseController {
         }
     }
 
+    async getChapterById(req, res, next) {
+        try {
+            const { chapterId } = req.params;
+
+            const chapter = await chapterModel.findById(chapterId);
+
+            return res.status(200).json(chapter);
+        } catch (err) {
+            next(err);
+        }
+    }
+
     async createTheoryForModule(req, res, next) {
         try {
             const { chapterName, chapterContent } = req.body;
             const moduleId = req.params.id;
 
-            const chapterId = ObjectId();
+            const chapterData = await chapterModel.create({
+                chapterName,
+                chapterContent,
+            });
 
             await moduleModel.findByIdAndUpdate(
                 moduleId,
                 {
                     $push: {
                         chapters: {
-                            id: chapterId,
-                            chapterName,
-                            chapterContent,
+                            chapterId: chapterData._id,
+                            chapterName: chapterData.chapterName,
                         },
                     },
                 },
@@ -93,11 +135,8 @@ class CourseController {
                     new: true,
                 },
             );
-            return res.status(200).json({
-                id: chapterId,
-                chapterName,
-                chapterContent,
-            });
+
+            return res.status(201).json(chapterData);
         } catch (err) {
             next(err);
         }

@@ -8,30 +8,28 @@ import PublicRoute from './PublicRouter';
 import routes from '../routes';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.onGetCurrentUser();
-  }
-  render() {
-    return (
-      <BrowserRouter>
-        <Layout>
-          <Suspense fallback={<h1>Loading...</h1>}>
-            <Switch>
-              {routes.map(route =>
-                route.private ? (
-                  <PrivateRoute key={route.label} {...route} />
-                ) : (
-                  <PublicRoute key={route.label} {...route} />
-                ),
-              )}
-            </Switch>
-          </Suspense>
-        </Layout>
-      </BrowserRouter>
-    );
-  }
+    componentDidMount() {
+        this.props.onGetCurrentUser();
+    }
+    render() {
+        return (
+            <BrowserRouter>
+                <Layout>
+                    <Switch>
+                        {routes.map(route =>
+                            route.private ? (
+                                <PrivateRoute key={route.label} {...route} />
+                            ) : (
+                                <PublicRoute key={route.label} {...route} />
+                            ),
+                        )}
+                    </Switch>
+                </Layout>
+            </BrowserRouter>
+        );
+    }
 }
 
 export default connect(null, {
-  onGetCurrentUser: authOperations.getCurrentUser,
+    onGetCurrentUser: authOperations.getCurrentUser,
 })(App);
